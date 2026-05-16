@@ -8,7 +8,7 @@ import { User, AuthResponse, LoginRequest, RegisterRequest } from '../models/aut
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://game-vault-production.up.railway.app/api/scraper';
+  private apiUrl = 'https://game-vault-production.up.railway.app/api/auth';
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
