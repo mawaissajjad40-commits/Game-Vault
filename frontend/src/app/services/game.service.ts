@@ -7,8 +7,7 @@ import { Game, GamesResponse, SavedGame } from '../models/game.model';
   providedIn: 'root'
 })
 export class GameService {
-  private apiUrl = 'http://localhost:3000/api/scraper';
-
+   private apiUrl = 'https://game-vault-production.up.railway.app/api/scraper';
   constructor(private http: HttpClient) {}
 
   getAllGames(page: number = 1, limit: number = 20, category?: string, search?: string): Observable<GamesResponse> {
