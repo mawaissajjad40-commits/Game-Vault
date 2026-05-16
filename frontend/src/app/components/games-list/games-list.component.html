@@ -1,0 +1,105 @@
+<!-- Hero Banner -->
+<div class="hero-banner">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">◈ GameVault Database</p>
+    <h1 class="hero-title">Discover Your Next<br><span class="hero-accent">Epic Adventure</span></h1>
+    <p class="hero-sub">{{ totalGames | number }} games and counting</p>
+
+    <!-- Search Bar -->
+    <div class="hero-search">
+      <i class="bi bi-search search-icon"></i>
+      <input type="text" placeholder="Search games, genres, tags..." 
+        [(ngModel)]="search" (keyup.enter)="onSearch()" class="search-input">
+      <button class="search-btn" (click)="onSearch()">Search</button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+
+  <!-- Category Pills -->
+  <div class="category-row">
+    <button *ngFor="let cat of categories"
+      class="cat-pill"
+      [class.active]="selectedCategory === cat"
+      (click)="selectCategory(cat)">
+      {{ cat }}
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="loader"></div>
+    <p>Loading games...</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="error && !loading" class="error-state">
+    <i class="bi bi-exclamation-triangle-fill"></i>
+    <p>{{ error }}</p>
+    <button class="btn-accent-sm" (click)="loadGames()">Try Again</button>
+  </div>
+
+  <!-- Games Grid -->
+  <div class="games-grid" *ngIf="!loading && games.length > 0">
+    <div class="game-card" *ngFor="let game of games; let i = index"
+      [style.animation-delay]="(i * 0.05) + 's'">
+
+      <!-- Image -->
+      <div class="card-image-wrap">
+        <img [src]="game.imageUrl || 'https://placehold.co/400x220/111118/00d4ff?text=No+Image'"
+          [alt]="game.title" class="card-img" loading="lazy">
+        <div class="card-overlay">
+          <a [routerLink]="['/games', game._id]" class="play-btn">
+            <i class="bi bi-play-fill"></i>
+          </a>
+        </div>
+        <span class="rating-badge">⭐ {{ game.rating.toFixed(1) }}</span>
+        <span class="price-badge" [class.free]="game.price === 0">
+          {{ game.price === 0 ? 'FREE' : '$' + game.price }}
+        </span>
+      </div>
+
+      <!-- Info -->
+      <div class="card-info">
+        <h3 class="card-title" [title]="game.title">{{ game.title }}</h3>
+        <div class="card-meta">
+          <span class="cat-tag">{{ game.category || 'General' }}</span>
+          <span class="dl-count"><i class="bi bi-download"></i> {{ game.downloads | number }}</span>
+        </div>
+
+        <!-- Actions -->
+        <div class="card-actions">
+          <a [routerLink]="['/games', game._id]" class="btn-view">Details</a>
+          <button class="btn-save" (click)="saveGame(game)" *ngIf="isLoggedIn" title="Save to collection">
+            <i class="bi bi-bookmark-plus-fill"></i>
+          </button>
+          <a routerLink="/login" class="btn-save muted" *ngIf="!isLoggedIn" title="Login to save">
+            <i class="bi bi-lock-fill"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty -->
+  <div *ngIf="!loading && games.length === 0" class="empty-state">
+    <div class="empty-icon">🎮</div>
+    <h3>No games found</h3>
+    <p>Try a different search or category</p>
+    <button class="btn-accent-sm" (click)="resetFilters()">Clear Filters</button>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-row" *ngIf="totalPages > 1 && !loading && games.length > 0">
+    <button class="page-btn" [disabled]="page === 1" (click)="previousPage()">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    <span class="page-info">{{ page }} / {{ totalPages }}</span>
+    <button class="page-btn" [disabled]="page === totalPages" (click)="nextPage()">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+</div>

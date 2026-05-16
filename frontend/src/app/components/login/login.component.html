@@ -1,0 +1,50 @@
+<div class="auth-page">
+  <div class="auth-bg-grid"></div>
+  <div class="auth-glow"></div>
+
+  <div class="auth-card">
+    <div class="auth-logo">◈ <span>Game</span>Vault</div>
+    <h2 class="auth-title">Welcome Back</h2>
+    <p class="auth-sub">Sign in to your account</p>
+
+    <div *ngIf="error" class="auth-error">
+      <i class="bi bi-exclamation-circle-fill"></i> {{ error }}
+      <button class="close-btn" (click)="error = null"><i class="bi bi-x"></i></button>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <div class="field-group">
+        <label>Email Address</label>
+        <div class="input-wrap" [class.invalid]="submitted && f['email'].errors">
+          <i class="bi bi-envelope-fill"></i>
+          <input type="email" formControlName="email" placeholder="you@example.com">
+        </div>
+        <div class="field-error" *ngIf="submitted && f['email'].errors">
+          <span *ngIf="f['email'].hasError('required')">Email is required</span>
+          <span *ngIf="f['email'].hasError('email')">Enter a valid email</span>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Password</label>
+        <div class="input-wrap" [class.invalid]="submitted && f['password'].errors">
+          <i class="bi bi-lock-fill"></i>
+          <input type="password" formControlName="password" placeholder="••••••••">
+        </div>
+        <div class="field-error" *ngIf="submitted && f['password'].errors">
+          <span *ngIf="f['password'].hasError('required')">Password is required</span>
+          <span *ngIf="f['password'].hasError('minlength')">Minimum 8 characters</span>
+        </div>
+      </div>
+
+      <button type="submit" class="auth-btn" [disabled]="loading">
+        <span *ngIf="!loading">Sign In</span>
+        <span *ngIf="loading" class="loading-dots"><span></span><span></span><span></span></span>
+      </button>
+    </form>
+
+    <p class="auth-footer">
+      Don't have an account? <a routerLink="/register">Create one</a>
+    </p>
+  </div>
+</div>

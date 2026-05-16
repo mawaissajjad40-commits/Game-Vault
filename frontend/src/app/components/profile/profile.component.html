@@ -1,0 +1,112 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg border-0">
+        <div class="card-body p-5">
+
+          <h2 class="card-title text-center mb-4">👤 User Profile</h2>
+
+          <!-- Success Message -->
+          <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ success }}
+            <button type="button" class="btn-close" (click)="success = null"></button>
+          </div>
+
+          <!-- Error Message -->
+          <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="btn-close" (click)="error = null"></button>
+          </div>
+
+          <!-- Form -->
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+            <!-- Username -->
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                formControlName="username"
+                [disabled]="true"
+              >
+              <small class="text-muted">Username cannot be changed</small>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                [disabled]="true"
+              >
+              <small class="text-muted">Email cannot be changed</small>
+            </div>
+
+            <!-- First Name -->
+            <div class="mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                formControlName="firstName"
+                [class.is-invalid]="submitted && f['firstName'].errors"
+              >
+              <div class="invalid-feedback" *ngIf="submitted && f['firstName'].errors">
+                First name cannot exceed 50 characters
+              </div>
+            </div>
+
+            <!-- Last Name -->
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                formControlName="lastName"
+                [class.is-invalid]="submitted && f['lastName'].errors"
+              >
+              <div class="invalid-feedback" *ngIf="submitted && f['lastName'].errors">
+                Last name cannot exceed 50 characters
+              </div>
+            </div>
+
+            <!-- Account Info -->
+            <div class="alert alert-info" *ngIf="currentUser">
+              <small>
+                <strong>Account Status:</strong> {{ currentUser.isActive ? 'Active' : 'Inactive' }} <br>
+                <strong>Role:</strong> {{ currentUser.role | uppercase }} <br>
+                <strong>Member Since:</strong> {{ currentUser.createdAt | date:'mediumDate' }}
+              </small>
+            </div>
+
+            <!-- Save Button -->
+            <button type="submit" class="btn btn-primary w-100 mb-3" [disabled]="loading">
+              <span *ngIf="!loading">Save Changes</span>
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+              <span *ngIf="loading">Saving...</span>
+            </button>
+
+            <!-- Actions -->
+            <div class="btn-group w-100" role="group">
+              <button type="button" class="btn btn-outline-danger flex-grow-1" (click)="logout()">
+                Logout
+              </button>
+              <a routerLink="/games" class="btn btn-outline-secondary flex-grow-1">
+                Browse Games
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

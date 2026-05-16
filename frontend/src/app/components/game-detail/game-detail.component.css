@@ -1,0 +1,79 @@
+.save-card {
+  border-radius: 12px;
+  position: sticky;
+  top: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.rating-stars {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.rating-stars i {
+  transition: all 0.2s ease;
+}
+
+.rating-stars i:hover {
+  transform: scale(1.2);
+}
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.info-label {
+  font-size: 0.85rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.info-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.badge {
+  padding: 0.5rem 0.8rem;
+  font-size: 0.95rem;
+}
+
+.btn-group .btn {
+  border-radius: 8px;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.display-5 {
+  color: #333;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .save-card {
+    position: static;
+    margin-bottom: 2rem;
+  }
+
+  .display-5 {
+    font-size: 1.8rem;
+  }
+}

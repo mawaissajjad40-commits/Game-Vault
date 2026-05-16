@@ -1,0 +1,153 @@
+<div class="container py-4">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error && !loading" class="alert alert-danger" role="alert">
+    {{ error }}
+    <button (click)="goBack()" class="btn btn-primary mt-2">Back to Games</button>
+  </div>
+
+  <!-- Game Details -->
+  <div *ngIf="game && !loading" class="row">
+    <!-- Image and Save Section -->
+    <div class="col-lg-4 mb-4">
+      <img [src]="game.imageUrl || '/assets/images/placeholder.jpg'" 
+        class="img-fluid rounded-3 shadow mb-4" [alt]="game.title">
+
+      <div class="card save-card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Save This Game</h5>
+
+          <div class="mb-3">
+            <label for="rating" class="form-label">Your Rating</label>
+            <div class="rating-stars">
+              <i *ngFor="let star of [1, 2, 3, 4, 5]" 
+                class="bi" 
+                [class.bi-star-fill]="star <= rating"
+                [class.bi-star]="star > rating"
+                (click)="rating = star"
+                style="cursor: pointer; font-size: 1.5rem; color: #ffc107;"></i>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="notes" class="form-label">Notes</label>
+            <textarea class="form-control" id="notes" rows="3" 
+              [(ngModel)]="notes" placeholder="Add your notes..."></textarea>
+          </div>
+
+          <button class="btn btn-primary w-100" (click)="saveGame()" *ngIf="isLoggedIn">
+            💾 Save to Collection
+          </button>
+          <a routerLink="/login" class="btn btn-secondary w-100" *ngIf="!isLoggedIn">
+            Login to Save
+          </a>
+
+          <hr>
+
+          <div class="btn-group w-100" role="group">
+            <button (click)="goBack()" class="btn btn-outline-secondary flex-grow-1">Back</button>
+            <a *ngIf="game.sourceUrl" [href]="game.sourceUrl" target="_blank" 
+              class="btn btn-outline-primary flex-grow-1">
+              View Source
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Details Section -->
+    <div class="col-lg-8">
+      <h1 class="display-5 fw-bold mb-3">{{ game.title }}</h1>
+
+      <!-- Info Bar -->
+      <div class="row g-3 mb-4">
+        <div class="col-sm-3">
+          <div class="info-box">
+            <span class="info-label">Rating</span>
+            <div class="info-value">
+              <span class="badge bg-warning text-dark">
+                ⭐ {{ game.rating.toFixed(1) }}/5
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="info-box">
+            <span class="info-label">Category</span>
+            <div class="info-value">
+              <span class="badge bg-info">{{ game.category || 'N/A' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="info-box">
+            <span class="info-label">Price</span>
+            <div class="info-value">
+              <span class="badge" [class.bg-success]="game.price === 0" [class.bg-primary]="game.price > 0">
+                {{ game.price === 0 ? 'Free' : ('$' + game.price) }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="info-box">
+            <span class="info-label">Downloads</span>
+            <div class="info-value">
+              <span class="badge bg-secondary">{{ game.downloads | number }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-4">
+        <h3>Description</h3>
+        <p class="lead">{{ game.description || 'No description available' }}</p>
+      </div>
+
+      <!-- Tags -->
+      <div *ngIf="game.tags && game.tags.length > 0" class="mb-4">
+        <h3>Tags</h3>
+        <div>
+          <span *ngFor="let tag of game.tags" class="badge bg-secondary me-2 mb-2">
+            {{ tag }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Additional Info -->
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Source</h5>
+              <p class="card-text">
+                <span class="badge bg-primary">{{ game.source | uppercase }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Last Updated</h5>
+              <p class="card-text">
+                {{ game.updatedAt | date: 'medium' }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

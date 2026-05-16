@@ -1,0 +1,22 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+.text-white-50 {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+}
+
+.text-white-50:hover {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+}
+
+footer {
+  margin-top: auto;
+}

@@ -1,0 +1,92 @@
+<div class="auth-page">
+  <div class="auth-bg-grid"></div>
+  <div class="auth-glow"></div>
+
+  <div class="auth-card wide">
+    <div class="auth-logo">◈ <span>Game</span>Vault</div>
+    <h2 class="auth-title">Create Account</h2>
+    <p class="auth-sub">Join thousands of gamers</p>
+
+    <div *ngIf="error" class="auth-error">
+      <i class="bi bi-exclamation-circle-fill"></i> {{ error }}
+      <button class="close-btn" (click)="error = null"><i class="bi bi-x"></i></button>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <div class="field-group">
+        <label>Username</label>
+        <div class="input-wrap" [class.invalid]="submitted && f['username'].errors">
+          <i class="bi bi-person-fill"></i>
+          <input type="text" formControlName="username" placeholder="coolplayer99">
+        </div>
+        <div class="field-error" *ngIf="submitted && f['username'].errors">
+          <span *ngIf="f['username'].hasError('required')">Username is required</span>
+          <span *ngIf="f['username'].hasError('minlength')">Minimum 3 characters</span>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Email Address</label>
+        <div class="input-wrap" [class.invalid]="submitted && f['email'].errors">
+          <i class="bi bi-envelope-fill"></i>
+          <input type="email" formControlName="email" placeholder="you@example.com">
+        </div>
+        <div class="field-error" *ngIf="submitted && f['email'].errors">
+          <span *ngIf="f['email'].hasError('required')">Email is required</span>
+          <span *ngIf="f['email'].hasError('email')">Invalid email format</span>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="field-group">
+          <label>Password</label>
+          <div class="input-wrap" [class.invalid]="submitted && f['password'].errors">
+            <i class="bi bi-lock-fill"></i>
+            <input type="password" formControlName="password" placeholder="••••••••">
+          </div>
+          <div class="field-error" *ngIf="submitted && f['password'].errors">
+            <span *ngIf="f['password'].hasError('required')">Required</span>
+            <span *ngIf="f['password'].hasError('minlength')">Min 8 chars</span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Confirm Password</label>
+          <div class="input-wrap" [class.invalid]="submitted && (f['confirmPassword'].errors || registerForm.hasError('passwordMismatch'))">
+            <i class="bi bi-shield-lock-fill"></i>
+            <input type="password" formControlName="confirmPassword" placeholder="••••••••">
+          </div>
+          <div class="field-error" *ngIf="submitted && registerForm.hasError('passwordMismatch')">
+            <span>Passwords don't match</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="field-group">
+          <label>First Name <span class="optional">(optional)</span></label>
+          <div class="input-wrap">
+            <i class="bi bi-person-badge-fill"></i>
+            <input type="text" formControlName="firstName" placeholder="John">
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Last Name <span class="optional">(optional)</span></label>
+          <div class="input-wrap">
+            <i class="bi bi-person-badge-fill"></i>
+            <input type="text" formControlName="lastName" placeholder="Doe">
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="auth-btn" [disabled]="loading">
+        <span *ngIf="!loading">Create Account</span>
+        <span *ngIf="loading" class="loading-dots"><span></span><span></span><span></span></span>
+      </button>
+    </form>
+
+    <p class="auth-footer">
+      Already have an account? <a routerLink="/login">Sign in</a>
+    </p>
+  </div>
+</div>

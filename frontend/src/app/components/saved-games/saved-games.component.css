@@ -1,0 +1,57 @@
+.collection-card {
+  border: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.collection-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.collection-card img {
+  border-radius: 12px 0 0 12px;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.badge {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+
+.btn-group {
+  gap: 0.25rem;
+}
+
+.btn-group .btn {
+  font-size: 0.875rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+}
+
+.display-4 {
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 576px) {
+  .collection-card .row {
+    flex-direction: column;
+  }
+
+  .collection-card img {
+    border-radius: 12px 12px 0 0;
+    height: 200px;
+  }
+
+  .display-4 {
+    font-size: 1.8rem;
+  }
+}

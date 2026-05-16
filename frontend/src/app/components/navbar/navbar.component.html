@@ -1,0 +1,48 @@
+<nav class="gv-nav">
+  <div class="gv-nav__inner">
+    <!-- Logo -->
+    <a class="gv-nav__logo" routerLink="/">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">Game<span class="logo-accent">Vault</span></span>
+    </a>
+
+    <!-- Links -->
+    <ul class="gv-nav__links">
+      <li>
+        <a routerLink="/games" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          <i class="bi bi-grid-3x3-gap-fill"></i> Browse
+        </a>
+      </li>
+      <li *ngIf="isLoggedIn">
+        <a routerLink="/saved" routerLinkActive="active">
+          <i class="bi bi-bookmark-heart-fill"></i> My Collection
+        </a>
+      </li>
+    </ul>
+
+    <!-- Auth Area -->
+    <div class="gv-nav__auth">
+      <ng-container *ngIf="!isLoggedIn">
+        <a routerLink="/login" class="btn-ghost">Login</a>
+        <a routerLink="/register" class="btn-accent">Join Free</a>
+      </ng-container>
+
+      <ng-container *ngIf="isLoggedIn">
+        <div class="user-menu" (click)="menuOpen = !menuOpen" [class.open]="menuOpen">
+          <div class="user-avatar">{{ currentUser?.username?.charAt(0)?.toUpperCase() }}</div>
+          <span class="user-name">{{ currentUser?.username }}</span>
+          <i class="bi bi-chevron-down chevron"></i>
+          <div class="dropdown-panel" *ngIf="menuOpen">
+            <a routerLink="/profile" (click)="menuOpen=false">
+              <i class="bi bi-person-circle"></i> Profile
+            </a>
+            <hr>
+            <a (click)="logout(); menuOpen=false" class="logout-link">
+              <i class="bi bi-box-arrow-right"></i> Logout
+            </a>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</nav>
