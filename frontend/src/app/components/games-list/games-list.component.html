@@ -1,15 +1,46 @@
+<!-- Toast Notifications -->
+<div class="toast-container">
+  <div *ngFor="let toast of toasts" class="toast-msg {{ toast.type }}">
+    {{ toast.message }}
+  </div>
+</div>
+
+<!-- Feeling Lucky Button -->
+<button class="lucky-btn" (click)="feelingLucky()" [class.spinning]="isLuckySpinning">
+  <span *ngIf="!isLuckySpinning">🎲 I'm Feeling Lucky</span>
+  <span *ngIf="isLuckySpinning">🎰 Rolling...</span>
+</button>
+
 <!-- Hero Banner -->
 <div class="hero-banner">
   <div class="hero-bg-grid"></div>
+  <div class="hero-particles">
+    <span *ngFor="let p of [1,2,3,4,5,6,7,8]" class="particle"></span>
+  </div>
   <div class="hero-content">
-    <p class="hero-eyebrow">◈ GameVault Database</p>
+    <p class="hero-eyebrow">◈ GameVault Universe</p>
     <h1 class="hero-title">Discover Your Next<br><span class="hero-accent">Epic Adventure</span></h1>
-    <p class="hero-sub">{{ totalGames | number }} games and counting</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">{{ totalGames | number }}</span>
+        <span class="stat-label">Games</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">{{ categories.length - 1 }}</span>
+        <span class="stat-label">Genres</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">Free</span>
+        <span class="stat-label">Always</span>
+      </div>
+    </div>
 
     <!-- Search Bar -->
     <div class="hero-search">
       <i class="bi bi-search search-icon"></i>
-      <input type="text" placeholder="Search games, genres, tags..." 
+      <input type="text" placeholder="Search games, genres, tags..."
         [(ngModel)]="search" (keyup.enter)="onSearch()" class="search-input">
       <button class="search-btn" (click)="onSearch()">Search</button>
     </div>
@@ -19,13 +50,34 @@
 <!-- Main Content -->
 <div class="main-content">
 
-  <!-- Category Pills -->
-  <div class="category-row">
-    <button *ngFor="let cat of categories"
-      class="cat-pill"
-      [class.active]="selectedCategory === cat"
-      (click)="selectCategory(cat)">
-      {{ cat }}
+  <!-- Filters Row -->
+  <div class="filters-row">
+    <!-- Category Pills -->
+    <div class="category-row">
+      <button *ngFor="let cat of categories"
+        class="cat-pill"
+        [class.active]="selectedCategory === cat"
+        (click)="selectCategory(cat)">
+        {{ cat }}
+      </button>
+    </div>
+
+    <!-- Rating Filter -->
+    <div class="rating-filter">
+      <label>
+        <i class="bi bi-star-fill"></i>
+        Min Rating: <strong>{{ minRating.toFixed(1) }}+</strong>
+      </label>
+      <input type="range" min="0" max="5" step="0.5"
+        [(ngModel)]="minRating" (input)="onRatingFilter()" class="rating-slider">
+    </div>
+  </div>
+
+  <!-- Results Info -->
+  <div class="results-bar" *ngIf="!loading">
+    <span class="results-count">{{ games.length }} games found</span>
+    <button class="reset-btn" *ngIf="search || selectedCategory !== 'All' || minRating > 0" (click)="resetFilters()">
+      <i class="bi bi-x-circle"></i> Clear Filters
     </button>
   </div>
 
@@ -45,7 +97,7 @@
   <!-- Games Grid -->
   <div class="games-grid" *ngIf="!loading && games.length > 0">
     <div class="game-card" *ngFor="let game of games; let i = index"
-      [style.animation-delay]="(i * 0.05) + 's'">
+      [style.animation-delay]="(i * 0.04) + 's'">
 
       <!-- Image -->
       <div class="card-image-wrap">
@@ -70,10 +122,16 @@
           <span class="dl-count"><i class="bi bi-download"></i> {{ game.downloads | number }}</span>
         </div>
 
+        <!-- Star Rating Visual -->
+        <div class="star-row">
+          <i *ngFor="let s of getStars(game.rating)" class="bi bi-star-fill star"></i>
+          <i *ngFor="let s of [].constructor(5 - getStars(game.rating).length)" class="bi bi-star star empty"></i>
+        </div>
+
         <!-- Actions -->
         <div class="card-actions">
           <a [routerLink]="['/games', game._id]" class="btn-view">Details</a>
-          <button class="btn-save" (click)="saveGame(game)" *ngIf="isLoggedIn" title="Save to collection">
+          <button class="btn-save" (click)="saveGame(game)" *ngIf="isLoggedIn" title="Save">
             <i class="bi bi-bookmark-plus-fill"></i>
           </button>
           <a routerLink="/login" class="btn-save muted" *ngIf="!isLoggedIn" title="Login to save">
@@ -85,10 +143,10 @@
   </div>
 
   <!-- Empty -->
-  <div *ngIf="!loading && games.length === 0" class="empty-state">
+  <div *ngIf="!loading && games.length === 0 && !error" class="empty-state">
     <div class="empty-icon">🎮</div>
     <h3>No games found</h3>
-    <p>Try a different search or category</p>
+    <p>Try a different search or lower the rating filter</p>
     <button class="btn-accent-sm" (click)="resetFilters()">Clear Filters</button>
   </div>
 

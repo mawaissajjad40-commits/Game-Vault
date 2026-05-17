@@ -1,0 +1,167 @@
+/* ===== MOOD THEMES ===== */
+:root,
+body.mood-night {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #111118;
+  --bg-card: #16161f;
+  --accent: #00d4ff;
+  --accent2: #7b2fff;
+  --accent-glow: rgba(0,212,255,0.15);
+  --text-primary: #f0f0f8;
+  --text-muted: #7a7a9a;
+  --border: rgba(255,255,255,0.07);
+  --gold: #ffc93c;
+  --success: #00e676;
+  --danger: #ff4757;
+  --nav-bg: rgba(10,10,15,0.85);
+}
+
+body.mood-light {
+  --bg-primary: #f0f2f8;
+  --bg-secondary: #e0e4f0;
+  --bg-card: #ffffff;
+  --accent: #0088cc;
+  --accent2: #6600cc;
+  --accent-glow: rgba(0,136,204,0.15);
+  --text-primary: #1a1a2e;
+  --text-muted: #6666aa;
+  --border: rgba(0,0,0,0.1);
+  --gold: #cc8800;
+  --success: #00aa44;
+  --danger: #cc2233;
+  --nav-bg: rgba(240,242,248,0.92);
+}
+
+body.mood-neon {
+  --bg-primary: #050510;
+  --bg-secondary: #0a0a1a;
+  --bg-card: #0d0d20;
+  --accent: #ff00ff;
+  --accent2: #00ff88;
+  --accent-glow: rgba(255,0,255,0.2);
+  --text-primary: #ffffff;
+  --text-muted: #aa88cc;
+  --border: rgba(255,0,255,0.12);
+  --gold: #ffff00;
+  --success: #00ff88;
+  --danger: #ff0044;
+  --nav-bg: rgba(5,5,16,0.9);
+}
+
+body.mood-chill {
+  --bg-primary: #050d18;
+  --bg-secondary: #071220;
+  --bg-card: #0a1828;
+  --accent: #4fc3f7;
+  --accent2: #0288d1;
+  --accent-glow: rgba(79,195,247,0.15);
+  --text-primary: #e8f4fd;
+  --text-muted: #7ab8d4;
+  --border: rgba(79,195,247,0.1);
+  --gold: #ffd54f;
+  --success: #69f0ae;
+  --danger: #ff5252;
+  --nav-bg: rgba(5,13,24,0.88);
+}
+
+body.mood-cyberpunk {
+  --bg-primary: #0d0005;
+  --bg-secondary: #150008;
+  --bg-card: #1a000a;
+  --accent: #ff0055;
+  --accent2: #ffcc00;
+  --accent-glow: rgba(255,0,85,0.2);
+  --text-primary: #ffe8f0;
+  --text-muted: #cc7799;
+  --border: rgba(255,0,85,0.12);
+  --gold: #ffcc00;
+  --success: #00ff88;
+  --danger: #ff0055;
+  --nav-bg: rgba(13,0,5,0.9);
+}
+
+/* ===== BASE ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.4s ease, color 0.3s ease;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 3px; }
+
+app-root { display: flex; flex-direction: column; min-height: 100vh; }
+
+/* ===== TOAST ===== */
+.toast-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.toast-msg {
+  padding: 0.85rem 1.4rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: slideInRight 0.3s ease;
+  backdrop-filter: blur(10px);
+  min-width: 220px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.toast-msg.success { background: rgba(0,230,118,0.15); border: 1px solid rgba(0,230,118,0.3); color: var(--success); }
+.toast-msg.error   { background: rgba(255,71,87,0.15);  border: 1px solid rgba(255,71,87,0.3);  color: var(--danger); }
+.toast-msg.info    { background: var(--accent-glow);     border: 1px solid rgba(0,212,255,0.3);  color: var(--accent); }
+
+/* ===== LUCKY BUTTON ===== */
+.lucky-btn {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 1000;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 20px var(--accent-glow);
+  animation: float 3s ease-in-out infinite;
+  transition: box-shadow 0.2s;
+}
+.lucky-btn:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.5), 0 0 30px var(--accent-glow); }
+.lucky-btn.spinning { animation: none; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse-glow {
+  0%,100% { text-shadow: 0 0 10px var(--accent-glow); }
+  50%     { text-shadow: 0 0 25px var(--accent); }
+}
