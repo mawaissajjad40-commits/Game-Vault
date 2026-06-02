@@ -1,142 +1,311 @@
-# Web Scraper App - Full Stack Application
+# 🎮 Web Scraper App - Full Stack Game Discovery Platform
 
-A complete full-stack web application for discovering and managing games with data fetched from external APIs. Built with Angular, Express.js, MongoDB, and Bootstrap.
+A modern full-stack web application for discovering, searching, and managing games using data fetched from external APIs. Built with **Angular**, **Express.js**, **MongoDB**, and **Bootstrap**, the application provides a secure and responsive platform for game enthusiasts to maintain their personal game collections.
 
-## 🎯 Features
+---
 
-- ✅ **Responsive Design**: Bootstrap 5 + CSS responsive layout
-- ✅ **Chrome Optimized**: Fully tested and optimized for Chrome browser
-- ✅ **Secure Login**: JWT-based authentication with strict input validation
-- ✅ **Web Scraping**: Fetch data from AnkerGames.net API
-- ✅ **Database**: MongoDB with Mongoose ODM
-- ✅ **Game Management**: Search, filter, and save games
-- ✅ **User Collection**: Manage wishlist, playing, completed, and archived games
-- ✅ **Deployment Ready**: Environment variables configured for live deployment
-- ✅ **RESTful API**: Express.js backend with comprehensive API
-- ✅ **Modern Frontend**: Angular 16 with TypeScript and RxJS
+## 📌 Overview
 
-## 📋 Project Structure
+The Web Scraper App enables users to:
 
+* Discover games from external gaming APIs.
+* Search and filter games efficiently.
+* Save games into personalized collections.
+* Manage game statuses such as Wishlist, Playing, Completed, and Archived.
+* Access their collection securely through JWT-based authentication.
+
+The application follows a modern client-server architecture with a RESTful API backend and a responsive Angular frontend.
+
+---
+
+# 🏗️ System Architecture
+
+```text
+┌─────────────────────┐
+│      Angular UI     │
+│   Bootstrap Frontend│
+└──────────┬──────────┘
+           │ REST API
+           ▼
+┌─────────────────────┐
+│    Express Server   │
+│ Authentication API  │
+│ Scraper Services    │
+│ Business Logic      │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│      MongoDB        │
+│ User Collections    │
+│ Saved Games         │
+└─────────────────────┘
+           │
+           ▼
+┌─────────────────────┐
+│ External Game APIs  │
+│  AnkerGames.net API │
+└─────────────────────┘
 ```
+
+---
+
+# ✨ Key Features
+
+## 🔐 Secure Authentication
+
+* JWT-based user authentication
+* Secure login and registration
+* Password hashing using bcryptjs
+* Protected routes and API endpoints
+* Session expiration management
+
+## 🎮 Game Discovery
+
+* Retrieve game data from external APIs
+* Advanced search functionality
+* Category-based filtering
+* Detailed game information pages
+
+## 📚 Personal Game Collection
+
+Users can organize games into:
+
+* Wishlist
+* Currently Playing
+* Completed
+* Archived
+
+Additional features:
+
+* Personal ratings
+* Notes and comments
+* Collection management
+
+## 📱 Responsive Design
+
+* Mobile-first design approach
+* Bootstrap 5 integration
+* Chrome browser optimization
+* Responsive cards and layouts
+* Smooth UI transitions
+
+---
+
+# 📂 Project Structure
+
+```text
 web-scraper-app/
-├── backend/                  # Node.js/Express Server
+│
+├── backend/
 │   ├── src/
-│   │   ├── config/          # Configuration files
-│   │   ├── controllers/     # Route handlers
-│   │   ├── models/          # Mongoose schemas
-│   │   ├── routes/          # API routes
-│   │   ├── middleware/      # Custom middleware
-│   │   ├── services/        # Business logic (scraping)
-│   │   ├── utils/           # Utility functions
-│   │   └── server.js        # Express app entry point
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── middleware/
+│   │   ├── services/
+│   │   ├── utils/
+│   │   └── server.js
+│   │
 │   ├── package.json
 │   └── README.md
 │
-├── frontend/                # Angular Application
+├── frontend/
 │   ├── src/
 │   │   ├── app/
-│   │   │   ├── components/  # UI components
-│   │   │   ├── services/    # HTTP services
-│   │   │   ├── models/      # TypeScript interfaces
+│   │   │   ├── components/
+│   │   │   ├── services/
+│   │   │   ├── models/
 │   │   │   ├── app.module.ts
 │   │   │   └── app-routing.module.ts
-│   │   ├── assets/          # Static files
-│   │   ├── index.html
-│   │   └── main.ts
+│   │
+│   ├── assets/
+│   ├── index.html
+│   ├── main.ts
 │   ├── package.json
 │   └── README.md
 │
-├── .env.example             # Environment variables template
+├── .env.example
 ├── .gitignore
-├── package.json             # Root scripts
-└── README.md                # This file
+├── package.json
+└── README.md
 ```
 
-## 🚀 Quick Start
+---
 
-### Prerequisites
-- Node.js v16+ and npm
-- MongoDB (local or Atlas)
-- Git
+# 🛠️ Technology Stack
 
-### 1. Clone and Setup
+## Frontend
+
+| Technology     | Purpose              |
+| -------------- | -------------------- |
+| Angular 16     | Frontend Framework   |
+| TypeScript     | Type Safety          |
+| RxJS           | Reactive Programming |
+| Bootstrap 5    | Responsive UI Design |
+| Angular Router | Client-side Routing  |
+
+---
+
+## Backend
+
+| Technology         | Purpose             |
+| ------------------ | ------------------- |
+| Node.js            | Runtime Environment |
+| Express.js         | Web Framework       |
+| JWT                | Authentication      |
+| bcryptjs           | Password Encryption |
+| Axios              | API Requests        |
+| Cheerio            | Web Scraping        |
+| Helmet             | Security Headers    |
+| Express Rate Limit | Request Limiting    |
+
+---
+
+## Database
+
+| Technology | Purpose        |
+| ---------- | -------------- |
+| MongoDB    | NoSQL Database |
+| Mongoose   | ODM Layer      |
+
+---
+
+# 🚀 Installation Guide
+
+## Prerequisites
+
+Before starting, ensure you have:
+
+* Node.js v16 or later
+* npm
+* MongoDB
+* Git
+
+---
+
+## Step 1: Clone Repository
+
 ```bash
-# Navigate to project
+git clone https://github.com/yourusername/web-scraper-app.git
+
 cd web-scraper-app
+```
 
-# Install all dependencies
+---
+
+## Step 2: Install Dependencies
+
+```bash
 npm run install-all
+```
 
-# Copy environment template
+---
+
+## Step 3: Configure Environment Variables
+
+Create a `.env` file using:
+
+```bash
 cp .env.example .env
 ```
 
-### 2. Configure Environment Variables
+Update the values:
 
-Edit `.env` file:
 ```env
-# Backend
 NODE_ENV=development
 PORT=3000
+
 MONGODB_URI=mongodb://localhost:27017/web-scraper
-JWT_SECRET=your-very-secure-secret-key-min-32-chars-here
+
+JWT_SECRET=your-super-secure-secret-key
 JWT_EXPIRE=7d
 
-# Frontend
 ANGULAR_API_URL=http://localhost:3000/api
 
-# Scraping
 ANKERGAMES_API_URL=https://api.ankergames.net
 SCRAPER_TIMEOUT=5000
 SCRAPER_RETRY_ATTEMPTS=3
 ```
 
-### 3. Setup MongoDB
+---
 
-**Local MongoDB:**
+## Step 4: Configure MongoDB
+
+### Local MongoDB
+
 ```bash
-# Windows (PowerShell)
-net start MongoDB
-
-# Or start MongoDB manually
 mongod
 ```
 
-**Cloud MongoDB (Atlas):**
+Or
+
+```powershell
+net start MongoDB
 ```
+
+### MongoDB Atlas
+
+```env
 MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/web-scraper
 ```
 
-### 4. Start the Application
+---
 
-**Terminal 1 - Backend:**
+## Step 5: Run Application
+
+### Backend
+
 ```bash
 cd backend
+
 npm run dev
-# Server runs on http://localhost:3000
 ```
 
-**Terminal 2 - Frontend:**
+Backend URL:
+
+```text
+http://localhost:3000
+```
+
+### Frontend
+
 ```bash
 cd frontend
+
 npm start
-# App opens at http://localhost:4200
 ```
 
-**Or Start Both Simultaneously:**
+Frontend URL:
+
+```text
+http://localhost:4200
+```
+
+### Start Both
+
 ```bash
 npm start
 ```
 
-## 📝 API Documentation
+---
 
-### Authentication Endpoints
+# 🔌 REST API Documentation
 
-**Register User**
-```
+---
+
+## Authentication Endpoints
+
+### Register User
+
+```http
 POST /api/auth/register
-Content-Type: application/json
+```
 
+Request:
+
+```json
 {
   "username": "johndoe",
   "email": "john@example.com",
@@ -144,308 +313,360 @@ Content-Type: application/json
   "firstName": "John",
   "lastName": "Doe"
 }
-
-Response: { token, user }
 ```
 
-**Login User**
+Response:
+
+```json
+{
+  "token": "jwt_token",
+  "user": {}
+}
 ```
+
+---
+
+### Login User
+
+```http
 POST /api/auth/login
-Content-Type: application/json
+```
 
+Request:
+
+```json
 {
   "email": "john@example.com",
   "password": "SecurePass123"
 }
-
-Response: { token, user }
 ```
 
-**Get Profile**
-```
-GET /api/auth/profile
-Authorization: Bearer {token}
+Response:
 
-Response: { user }
-```
-
-### Game/Scraper Endpoints
-
-**Get All Games (Paginated)**
-```
-GET /api/scraper/games?page=1&limit=20&category=Action&search=minecraft
-
-Response: { games: [], pagination: {} }
-```
-
-**Get Game Details**
-```
-GET /api/scraper/games/{id}
-
-Response: { game }
-```
-
-**Save Game to Collection**
-```
-POST /api/scraper/save
-Authorization: Bearer {token}
-Content-Type: application/json
-
+```json
 {
-  "gameId": "...",
-  "status": "wishlist",
-  "rating": 4,
-  "notes": "Looks fun"
+  "token": "jwt_token",
+  "user": {}
 }
-
-Response: { savedGame }
 ```
 
-**Get User's Saved Games**
+---
+
+### Get User Profile
+
+```http
+GET /api/auth/profile
 ```
+
+Headers:
+
+```http
+Authorization: Bearer <token>
+```
+
+---
+
+# 🎮 Game Endpoints
+
+---
+
+### Get Games
+
+```http
+GET /api/scraper/games
+```
+
+Example:
+
+```http
+/api/scraper/games?page=1&limit=20&category=Action
+```
+
+---
+
+### Get Game Details
+
+```http
+GET /api/scraper/games/:id
+```
+
+---
+
+### Save Game
+
+```http
+POST /api/scraper/save
+```
+
+Request:
+
+```json
+{
+  "gameId": "123",
+  "status": "wishlist",
+  "rating": 5,
+  "notes": "Interesting game"
+}
+```
+
+---
+
+### Get Saved Games
+
+```http
 GET /api/scraper/saved
-Authorization: Bearer {token}
-
-Response: { savedGames: [] }
 ```
 
-**Remove Saved Game**
-```
-DELETE /api/scraper/saved/{id}
-Authorization: Bearer {token}
+---
 
-Response: { message }
-```
+### Delete Saved Game
 
-## 🔒 Security Features
-
-### Backend
-- ✅ JWT authentication with expiration
-- ✅ Password hashing with bcryptjs
-- ✅ Input validation (express-validator)
-- ✅ Helmet for HTTP headers
-- ✅ Rate limiting (15 req/15min default)
-- ✅ CORS configuration
-- ✅ SQL injection prevention
-- ✅ XSS protection
-
-### Frontend
-- ✅ Token stored in localStorage
-- ✅ HTTP interceptor for auth headers
-- ✅ Route guards for protected pages
-- ✅ Form validation on client side
-- ✅ Secure password requirements
-
-### Database
-- ✅ Mongoose schema validation
-- ✅ Unique indexes on email/username
-- ✅ Role-based access control
-- ✅ Password encryption
-
-## 🎨 UI/UX Features
-
-- **Responsive Bootstrap Grid**: Mobile-first design
-- **Dark Theme Navigation**: Professional navbar
-- **Card-based Layout**: Modern game grid
-- **Smooth Animations**: Hover effects and transitions
-- **Loading States**: User feedback spinners
-- **Error Handling**: Alert messages and validation
-- **Sticky Navbar**: Navigation always accessible
-- **Sticky Game Card**: Save panel on details page
-
-## 📦 Dependencies
-
-### Backend
-- express: Web framework
-- mongoose: MongoDB ODM
-- bcryptjs: Password hashing
-- jsonwebtoken: JWT auth
-- axios: HTTP requests (scraping)
-- cheerio: HTML parsing
-- cors: CORS middleware
-- helmet: Security headers
-- express-rate-limit: Rate limiting
-- morgan: Logging
-
-### Frontend
-- @angular/core: Framework
-- @angular/forms: Forms & validation
-- @angular/router: Routing & guards
-- rxjs: Reactive programming
-- bootstrap: CSS framework
-- typescript: Type safety
-
-## 🌐 Deployment
-
-### Backend Deployment Options
-
-**Heroku**
-```bash
-git push heroku main
+```http
+DELETE /api/scraper/saved/:id
 ```
 
-**Railway.app**
-```bash
-railway link
-railway up
-```
+---
 
-**DigitalOcean App Platform**
-```bash
-doctl apps create --spec app.yaml
-```
+# 🔒 Security Features
 
-**AWS EC2 / Elastic Beanstalk**
-```bash
-eb init
-eb create web-scraper-env
-eb deploy
-```
+## Backend Security
 
-### Frontend Deployment Options
+* JWT Authentication
+* Password Hashing
+* Input Validation
+* Helmet Security Headers
+* CORS Protection
+* XSS Prevention
+* Rate Limiting
+* Secure API Design
 
-**Vercel**
-```bash
-vercel --prod
-```
+---
 
-**Netlify**
-```bash
-netlify deploy --prod --dir=frontend/dist
-```
+## Frontend Security
 
-**Firebase Hosting**
-```bash
-firebase deploy
-```
+* Route Guards
+* Form Validation
+* Secure Authentication Flow
+* Automatic Token Handling
+* Protected Components
 
-**GitHub Pages**
-```bash
-ng build --prod --base-href="/repo-name/"
-```
+---
 
-### Full Stack Production Checklist
+## Database Security
 
-- [ ] Set NODE_ENV=production
-- [ ] Update MongoDB to production URI
-- [ ] Use strong JWT_SECRET (32+ characters)
-- [ ] Enable HTTPS
-- [ ] Configure CORS for production domain
-- [ ] Setup SSL certificate
-- [ ] Enable database backups
-- [ ] Configure CDN for static assets
-- [ ] Setup error tracking (Sentry)
-- [ ] Enable logging (Winston/Morgan)
-- [ ] Test all API endpoints
-- [ ] Load test application
-- [ ] Setup monitoring
-- [ ] Configure email notifications
-- [ ] Implement rate limiting properly
+* Schema Validation
+* Unique Constraints
+* Password Encryption
+* Role-Based Authorization
 
-## 🧪 Testing
+---
 
-**Backend Unit Tests**
+# 🎨 User Interface Features
+
+* Responsive Bootstrap Grid
+* Professional Dark Navbar
+* Interactive Game Cards
+* Loading Indicators
+* Error Notifications
+* Hover Animations
+* Sticky Navigation
+* Mobile-Friendly Design
+
+---
+
+# 🧪 Testing
+
+## Backend Tests
+
 ```bash
 cd backend
+
 npm test
 ```
 
-**Frontend Unit Tests**
+---
+
+## Frontend Tests
+
 ```bash
 cd frontend
+
 npm test
 ```
 
-**Backend Integration Tests**
+---
+
+## Integration Tests
+
 ```bash
 npm run test:integration
 ```
 
-**API Testing with Postman**
-- Import API collection from `/docs/postman-collection.json`
-- Set environment variables
-- Run test suite
+---
 
-## 📚 Documentation
-
-- [Backend Documentation](./backend/README.md)
-- [Frontend Documentation](./frontend/README.md)
-- [API Documentation](./docs/API.md) - Create this file
-- [Deployment Guide](./docs/DEPLOYMENT.md) - Create this file
-
-## 🔧 Troubleshooting
-
-### Backend Won't Start
-```bash
-# Check if port 3000 is in use
-netstat -ano | findstr :3000
-
-# Kill process on port 3000
-taskkill /PID {PID} /F
-
-# Check MongoDB connection
-mongosh
-```
-
-### Frontend CORS Errors
-- Ensure backend is running
-- Check ANGULAR_API_URL in environment
-- Verify CORS configuration in backend
-
-### MongoDB Connection Failed
-- Check MongoDB is running
-- Verify MONGODB_URI in .env
-- Check firewall settings
-- Test connection: `mongosh mongodb://localhost:27017`
-
-### Build Failures
-```bash
-# Clear cache
-rm -rf node_modules package-lock.json
-npm install
-
-# Rebuild
-npm run build
-```
-
-## 📞 Support
-
-For issues, questions, or suggestions:
-1. Check existing issues
-2. Review documentation
-3. Create detailed issue report
-4. Include error logs and environment info
-
-## 📄 License
-
-MIT License - Feel free to use for personal/commercial projects
-
-## 🎯 Future Enhancements
-
-- [ ] Email verification for registration
-- [ ] Password reset functionality
-- [ ] OAuth2 integration (Google, GitHub)
-- [ ] WebSocket for real-time notifications
-- [ ] Admin dashboard
-- [ ] Advanced search with Elasticsearch
-- [ ] Game reviews and ratings
-- [ ] User following system
-- [ ] Export game list to CSV
-- [ ] Mobile app (React Native)
-- [ ] GraphQL API
-- [ ] Docker containerization
-
-## 🔗 Useful Resources
-
-- [Angular Documentation](https://angular.io/docs)
-- [Express Documentation](https://expressjs.com/)
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [Bootstrap 5 Documentation](https://getbootstrap.com/docs/5.3/)
-- [JWT Documentation](https://jwt.io/)
-- [Mongoose Documentation](https://mongoosejs.com/)
+# 🌐 Deployment Guide
 
 ---
 
-**Happy coding! 🚀**
-#   d e p l o y  
- 
+## Backend Deployment
+
+### Heroku
+
+```bash
+git push heroku main
+```
+
+### Railway
+
+```bash
+railway up
+```
+
+### DigitalOcean
+
+```bash
+doctl apps create
+```
+
+### AWS
+
+```bash
+eb init
+eb create
+eb deploy
+```
+
+---
+
+## Frontend Deployment
+
+### Vercel
+
+```bash
+vercel --prod
+```
+
+### Netlify
+
+```bash
+netlify deploy --prod
+```
+
+### Firebase Hosting
+
+```bash
+firebase deploy
+```
+
+### GitHub Pages
+
+```bash
+ng build --prod --base-href="/repo-name/"
+```
+
+---
+
+# ✅ Production Checklist
+
+* [ ] Enable Production Mode
+* [ ] Configure Production Database
+* [ ] Use Strong JWT Secret
+* [ ] Enable HTTPS
+* [ ] Configure CORS
+* [ ] Install SSL Certificate
+* [ ] Setup Backups
+* [ ] Configure Logging
+* [ ] Enable Monitoring
+* [ ] Test APIs
+* [ ] Perform Load Testing
+* [ ] Configure CDN
+
+---
+
+# 🔧 Troubleshooting
+
+## Port Already In Use
+
+```bash
+netstat -ano | findstr :3000
+
+taskkill /PID <PID> /F
+```
+
+---
+
+## MongoDB Connection Issues
+
+```bash
+mongosh
+```
+
+Verify:
+
+```env
+MONGODB_URI
+```
+
+---
+
+## Dependency Issues
+
+```bash
+rm -rf node_modules
+
+rm package-lock.json
+
+npm install
+```
+
+---
+
+# 🚀 Future Enhancements
+
+* Email Verification
+* Password Reset
+* OAuth Authentication
+* Real-Time Notifications
+* Admin Dashboard
+* Elasticsearch Search
+* User Reviews
+* Follow System
+* CSV Export
+* Mobile Application
+* GraphQL Support
+* Docker Containers
+
+---
+
+# 📖 Additional Documentation
+
+```text
+/backend/README.md
+/frontend/README.md
+/docs/API.md
+/docs/DEPLOYMENT.md
+```
+
+---
+
+# 📄 License
+
+MIT License
+
+This project is open-source and available for both personal and commercial use.
+
+---
+
+# 👨‍💻 Author
+Muhammad Faizan Iqbal (2502141)
+Muhammad Awais Sajjad (2502099)
+Muhammad Khaleeq Waqar (2502131)
+Developed as a modern full-stack web application using Angular, Express.js, MongoDB, and Bootstrap.
+
+---
+
+## ⭐ Happy Coding!
+
+If you found this project useful, consider giving it a star and contributing to future improvements.
+
+**Built with ❤️ using Angular, Express.js, MongoDB & Bootstrap**
